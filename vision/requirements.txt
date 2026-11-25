@@ -1,0 +1,5 @@
+onnxruntime>=1.18.0
+opencv-python>=4.9.0
+numpy>=1.26.0
+paho-mqtt>=2.0.0
+python-dotenv>=1.0.0

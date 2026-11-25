@@ -64,13 +64,16 @@ static bool initCamera() {
 
     sensor_t* s = esp_camera_sensor_get();
     if (s != nullptr) {
-        s->set_brightness(s, 0);
+        s->set_brightness(s, 1);
         s->set_contrast(s, 0);
         s->set_saturation(s, 0);
         s->set_whitebal(s, 1);
         s->set_awb_gain(s, 1);
         s->set_exposure_ctrl(s, 1);
+        s->set_aec2(s, 1);                          // Night/low-light auto-exposure
+        s->set_ae_level(s, 1);                      // Slight brightness boost (-2 to +2)
         s->set_gain_ctrl(s, 1);
+        s->set_gainceiling(s, GAINCEILING_16X);     // Higher ISO gain for dim rooms
     }
 
     Serial.printf("[CAM] OV2640 initialized (PSRAM: %s)\n", psramFound() ? "YES" : "NO");
