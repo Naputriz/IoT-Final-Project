@@ -1,0 +1,29 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets & Local Config
+secrets.h
+**/secrets.h
+.env
+*.local.json
+
+# Python (Vision / Tools)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
