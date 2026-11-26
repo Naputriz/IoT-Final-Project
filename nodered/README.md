@@ -1,20 +1,18 @@
-# Node-RED Vision Surveillance Flow (`nodered`)
+# Node-RED Surveillance & Control Flows (`nodered`)
 
-Standalone Node-RED dashboard flow for the ESP32-CAM + YOLOv8n person-detection pipeline.
+Node-RED **Dashboard 2.0** (`@flowfuse/node-red-dashboard`) flows for the **RC Car Security Surveillance System**.
+
+## Files
+- [`flow.json`](flow.json) — **Full Unified Dashboard** (Main ESP32 RC Car control, D-Pad, mode switching, path recording/playback, NTP patrol scheduler, 3x ultrasonic telemetry gauges, ESP32-CAM live MJPEG stream, and PIR + YOLOv8n intruder alerts).
+- [`vision_flow.json`](vision_flow.json) — Standalone Vision-only dashboard for testing the ESP32-CAM + YOLOv8n pipeline independently.
 
 ## Prerequisites
-1. Install **Node-RED** and **`node-red-dashboard`** (via Manage Palette → Install `node-red-dashboard`).
-2. Start an MQTT broker (e.g., local **Mosquitto** on `localhost:1883`, or update the `Local MQTT Broker` node to a cloud broker like `broker.hivemq.com`).
-3. Start `python vision/person_detector.py` so the annotated stream is live at `http://localhost:5000/stream`.
+1. Install **Node-RED** and **`@flowfuse/node-red-dashboard`** (via Manage Palette → Install `@flowfuse/node-red-dashboard`, which matches Module 9 of the course).
+2. MQTT Broker: Pre-configured for **`broker.hivemq.com:1883`** under the `iot_finpro_naputriz/rc/...` topic namespace (or update the MQTT broker node to a local Mosquitto instance).
+3. *(Optional for AI person detection)* Run `python vision/person_detector.py` so the annotated stream is live at `http://localhost:5000/stream`.
 
 ## Import & Run
 1. Open Node-RED (`http://localhost:1880`).
-2. Click the **Menu (☰) → Import → Select a file to import** and choose `vision_flow.json`.
-3. *(Optional)* If `esp32cam.local` does not resolve on your network, replace `esp32cam.local` with your ESP32-CAM's IP in the two HTTP Request nodes (`ESP32-CAM /flash` and `ESP32-CAM /status`).
-4. Click **Deploy**, then open the dashboard at **`http://localhost:1880/ui`**.
-
-## What It Shows
-- **Live Camera Feed:** Embedded YOLOv8n-annotated MJPEG stream (`http://localhost:5000/stream`).
-- **Intruder Alert Popup & Last Alert:** Listens to MQTT topic `rc/alert/person` and displays a red toast notification + timestamp.
-- **Camera Flash LED Toggle:** Sends `GET /flash?state=on|off` to the ESP32-CAM.
-- **Check ESP32-CAM Status:** Queries `GET /status` and shows IP + Wi-Fi RSSI.
+2. Click **Menu (☰) → Import → Select a file to import** and choose [`flow.json`](flow.json).
+3. *(Optional)* If `esp32cam.local` does not resolve on your network, replace `esp32cam.local` with your ESP32-CAM's IP in the HTTP Request nodes and the `ESP32-CAM MJPEG Stream` template.
+4. Click **Deploy**, then open the Dashboard 2.0 UI at **`http://localhost:1880/dashboard/rc-surveillance`**.

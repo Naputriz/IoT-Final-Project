@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "author": "IoT Final Project Team",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 40,
+      "left": -20,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "us_front",
+      "top": -180,
+      "left": -30,
+      "attrs": { "distance": "120" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "us_left",
+      "top": -180,
+      "left": -270,
+      "attrs": { "distance": "150" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "us_right",
+      "top": -180,
+      "left": 210,
+      "attrs": { "distance": "150" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": 310,
+      "left": -250,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_lf",
+      "top": 60,
+      "left": -270,
+      "attrs": { "color": "green", "label": "L-FWD (26)" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_lr",
+      "top": 120,
+      "left": -270,
+      "attrs": { "color": "red", "label": "L-REV (27)" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_rf",
+      "top": 180,
+      "left": -270,
+      "attrs": { "color": "blue", "label": "R-FWD (14)" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_rr",
+      "top": 240,
+      "left": -270,
+      "attrs": { "color": "yellow", "label": "R-REV (13)" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_lf",
+      "top": 88,
+      "left": -190,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_lr",
+      "top": 148,
+      "left": -190,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_rf",
+      "top": 208,
+      "left": -190,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_rr",
+      "top": 268,
+      "left": -190,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "us_front:VCC", "esp:5V", "red", [] ],
+    [ "us_front:GND", "esp:GND.2", "black", [] ],
+    [ "us_front:TRIG", "esp:18", "orange", [] ],
+    [ "us_front:ECHO", "esp:34", "yellow", [] ],
+
+    [ "us_left:VCC", "esp:5V", "red", [] ],
+    [ "us_left:GND", "esp:GND.1", "black", [] ],
+    [ "us_left:TRIG", "esp:19", "cyan", [] ],
+    [ "us_left:ECHO", "esp:35", "purple", [] ],
+
+    [ "us_right:VCC", "esp:5V", "red", [] ],
+    [ "us_right:GND", "esp:GND.2", "black", [] ],
+    [ "us_right:TRIG", "esp:21", "blue", [] ],
+    [ "us_right:ECHO", "esp:22", "magenta", [] ],
+
+    [ "pir1:VCC", "esp:5V", "red", [] ],
+    [ "pir1:GND", "esp:GND.1", "black", [] ],
+    [ "pir1:OUT", "esp:33", "white", [] ],
+
+    [ "esp:26", "r_lf:1", "green", [] ],
+    [ "r_lf:2", "led_lf:A", "green", [] ],
+    [ "led_lf:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:27", "r_lr:1", "red", [] ],
+    [ "r_lr:2", "led_lr:A", "red", [] ],
+    [ "led_lr:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:14", "r_rf:1", "blue", [] ],
+    [ "r_rf:2", "led_rf:A", "blue", [] ],
+    [ "led_rf:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:13", "r_rr:1", "gold", [] ],
+    [ "r_rr:2", "led_rr:A", "gold", [] ],
+    [ "led_rr:C", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

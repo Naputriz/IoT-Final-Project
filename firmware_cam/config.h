@@ -3,7 +3,17 @@
 // ============================================================================
 // Wi-Fi Configuration (Copy secrets.h.example -> secrets.h for credentials)
 // ============================================================================
+#if __has_include("secrets.h")
 #include "secrets.h"
+#endif
+
+#ifndef WIFI_SSID
+#define WIFI_SSID       "YOUR_WIFI_SSID"
+#endif
+
+#ifndef WIFI_PASSWORD
+#define WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
+#endif
 #define MDNS_HOSTNAME   "esp32cam"   // Accessible as http://esp32cam.local
 
 // ============================================================================
