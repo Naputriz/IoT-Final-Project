@@ -160,7 +160,11 @@ static void maintainMqtt() {
     Serial.printf("[MQTT] Connecting to %s:%d as %s...\n",
                   MQTT_BROKER, MQTT_PORT, clientId.c_str());
 
-    if (sMqttClient.connect(clientId.c_str())) {
+    bool connected = (strlen(MQTT_USER) > 0)
+        ? sMqttClient.connect(clientId.c_str(), MQTT_USER, MQTT_PASS)
+        : sMqttClient.connect(clientId.c_str());
+
+    if (connected) {
         Serial.println("[MQTT] Connected!");
         sMqttClient.subscribe(TOPIC_CMD_MOVE);
         sMqttClient.subscribe(TOPIC_CMD_MODE);
@@ -419,6 +423,8 @@ static void pollSerialCommands() {
 // Public Init & Task (Core 0)
 // ============================================================================
 void commsInit() {
+    sWifiClient.setTimeout(2);        // Keep TCP connect timeout < 5s ESP32 task_wdt
+    sMqttClient.setSocketTimeout(2);  // Prevent IDLE0 watchdog reset on slow broker
     sMqttClient.setServer(MQTT_BROKER, MQTT_PORT);
     sMqttClient.setCallback(onMqttMessage);
     sMqttClient.setBufferSize(512);

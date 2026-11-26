@@ -30,6 +30,14 @@
 #define MQTT_PORT           1883
 #endif
 
+#ifndef MQTT_USER
+#define MQTT_USER           ""
+#endif
+
+#ifndef MQTT_PASS
+#define MQTT_PASS           ""
+#endif
+
 // NTP Configuration (GMT+7 / WIB = 25200 seconds)
 #define NTP_SERVER_1        "pool.ntp.org"
 #define NTP_SERVER_2        "time.nist.gov"

@@ -28,6 +28,8 @@ CAM_STREAM_URL     = os.getenv("CAM_STREAM_URL", "http://esp32cam.local:81/strea
 MQTT_ENABLED       = os.getenv("MQTT_ENABLED", "true").lower() == "true"
 MQTT_BROKER        = os.getenv("MQTT_BROKER", "localhost")
 MQTT_PORT          = int(os.getenv("MQTT_PORT", "1883"))
+MQTT_USER          = os.getenv("MQTT_USER", "")
+MQTT_PASS          = os.getenv("MQTT_PASS", "")
 MQTT_TOPIC         = os.getenv("MQTT_TOPIC", "rc/alert/person")
 MODEL_PATH         = os.getenv("MODEL_PATH", "yolov8n.onnx")
 CONF_THRESHOLD     = float(os.getenv("CONF_THRESHOLD", "0.45"))
@@ -124,6 +126,8 @@ def create_mqtt_client():
     if not MQTT_ENABLED:
         return None
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    if MQTT_USER:
+        client.username_pw_set(MQTT_USER, MQTT_PASS)
     try:
         client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
         client.loop_start()
